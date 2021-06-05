@@ -8,6 +8,7 @@ interface task {
   endTime: string;
   duration: string;
   createdDate: Date;
+  week: number;
 }
 
 interface tasks {
@@ -23,14 +24,6 @@ const initialState: tasks = {
 export const getTasks = createAsyncThunk('tasks/get', async () => {
   const tasks = await axios.get('http://localhost:5000/tasks/get');
   return tasks.data;
-  // axios
-  //   .get('http://localhost:5000/tasks/get')
-  //   .then((res) => {
-  //     return res.data;
-  //   })
-  //   .catch((err) => {
-  //     return 'Failed to fetch tasks';
-  //   });
 });
 
 export const taskSlice = createSlice({

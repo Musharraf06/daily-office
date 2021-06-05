@@ -9,6 +9,7 @@ import {
   LabelText,
 } from './sidebarStyles';
 import { getDuration } from '../../../helpers/getDuration';
+import moment from 'moment';
 
 interface formValue {
   title: string;
@@ -32,7 +33,8 @@ const AddTask: FC = () => {
 
   const handleTaskAdd = () => {
     const duration = getDuration(formValues.startTime, formValues.endTime);
-    dispatch(addtask(Object.assign(formValues, { duration })));
+    const week = moment().isoWeek();
+    dispatch(addtask(Object.assign(formValues, { duration, week })));
     setTimeout(() => {
       window.location.href = '/tasks';
     }, 300);
