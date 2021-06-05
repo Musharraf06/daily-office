@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { HeaderContainer, NavElements, NavLink } from './headerStyles';
+import { HeaderContainer, NavLink } from './headerStyles';
 
 const Header = () => {
   const getActivePage = (currentLink: string) => {
@@ -14,25 +13,39 @@ const Header = () => {
   return (
     <>
       <HeaderContainer>
-        <span
-          style={{
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-            margin: '12px 1rem',
-          }}
-        >
+        <NavLink href='/' rel='noreferer' activePage={getActivePage('/')}>
           Daily Office
-        </span>
-        <NavElements>
-          <NavLink activePage={getActivePage('/tasks')}>
-            <Link to='/tasks' rel='noreferer'>
-              Tasks
-            </Link>
+        </NavLink>
+        <div>
+          <NavLink
+            href='/tasks'
+            rel='noreferer'
+            activePage={getActivePage('/tasks')}
+          >
+            Tasks
           </NavLink>
-          <NavLink activePage={getActivePage('/timesheet')}>Timesheet</NavLink>
-          <NavLink activePage={getActivePage('/about-us')}>About us</NavLink>
-          <NavLink activePage={getActivePage('/contact')}>Contact</NavLink>
-        </NavElements>
+          <NavLink
+            href='/timesheet'
+            rel='noreferer'
+            activePage={getActivePage('/timesheet')}
+          >
+            Timesheet
+          </NavLink>
+          <NavLink
+            href='/about'
+            rel='noreferer'
+            activePage={getActivePage('/about-us')}
+          >
+            About us
+          </NavLink>
+          <NavLink
+            href='/contact'
+            rel='noreferer'
+            activePage={getActivePage('/contact')}
+          >
+            Contact
+          </NavLink>
+        </div>
       </HeaderContainer>
     </>
   );

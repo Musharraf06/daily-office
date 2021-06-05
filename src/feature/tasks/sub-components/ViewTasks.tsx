@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import { Task } from '../taskStyles';
+import { Task, DateCloseIcon, FilterInput } from '../taskStyles';
 import moment from 'moment';
 
 interface task {
@@ -35,46 +35,41 @@ const ViewTasks: FC<viewTaskProps> = ({
     });
   };
 
+  const handleSearch = (value: string) => {
+    const searchResult = tasks.filter((task) =>
+      task.title.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredTasks(searchResult);
+  };
+
   return (
     <>
       <div
         style={{ margin: 6, display: 'flex', justifyContent: 'space-between' }}
       >
         <div>
-          <input
+          <FilterInput
             type='date'
             name='date_picker'
-            style={{ outline: 'none', border: 'none', padding: 3 }}
+            style={{ padding: 4 }}
             onChange={(e) => {
               setFilteredTasks(filterByDates(e.target.value));
             }}
           />
-          <span
-            style={{
-              color: 'red',
-              fontWeight: 'bold',
-              fontSize: '16px',
-              cursor: 'pointer',
-              margin: 3,
-            }}
+          <DateCloseIcon
             onClick={() => {
               setFilteredTasks(tasks);
             }}
             title='Clear date'
           >
             &#10060;
-          </span>
+          </DateCloseIcon>
         </div>
         <div>
-          <input
+          <FilterInput
             type='text'
-            style={{ outline: 'none', border: 'none', padding: 6 }}
             onChange={(e) => {
-              const value = e.target.value;
-              const searchResult = tasks.filter((task) =>
-                task.title.toLowerCase().includes(value.toLowerCase())
-              );
-              setFilteredTasks(searchResult);
+              handleSearch(e.target.value);
             }}
             placeholder='Search tasks'
           />

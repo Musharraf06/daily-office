@@ -41,3 +41,17 @@ export const MainTaskArea = styled.div`
 `;
 
 export const TaskSideBar = styled.div``;
+
+export const DateCloseIcon = styled.span`
+  color: red;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 3px;
+`;
+
+export const FilterInput = styled.input`
+  outline: none;
+  border: none;
+  padding: 6px;
+`;

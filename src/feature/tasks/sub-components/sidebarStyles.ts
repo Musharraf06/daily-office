@@ -42,7 +42,7 @@ export const Label = styled.label`
 `;
 
 export const LabelText = styled.span`
-  background-color: yellowgreen;
+  background-color: #236a94;
   color: #fff;
   display: flex;
   align-items: center;
