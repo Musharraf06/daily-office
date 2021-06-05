@@ -9,12 +9,12 @@ import {
   TaskNotFound,
   MainTaskArea,
   TaskSideBar,
-  Task,
 } from './taskStyles';
 import { Button } from '../../styles';
 import AddTask from './sub-components/AddTask';
 import Loader from '../loader/Loader';
 import UpdateTask from './sub-components/UpdateTask';
+import ViewTasks from './sub-components/ViewTasks';
 
 interface task {
   _id: string;
@@ -23,6 +23,7 @@ interface task {
   endTime: string;
   duration: string;
   createdDate: Date;
+  week: number;
 }
 
 const Tasks = () => {
@@ -37,7 +38,16 @@ const Tasks = () => {
     endTime: '00:00',
     duration: '00:00',
     createdDate: new Date(),
+    week: 0,
   });
+
+  const getCurrentTask = (task: task) => {
+    setCurrentTask(task);
+  };
+
+  const getSideBar = (sidebar: string) => {
+    setSideBarPage(sidebar);
+  };
 
   useEffect(() => {
     dispatch(getTasks());
@@ -62,42 +72,25 @@ const Tasks = () => {
           </TaskContainerHeader>
           <hr />
           <TaskContainerBody>
-            <MainTaskArea>
-              {status === 'loading' ? (
+            {status === 'loading' ? (
+              <MainTaskArea>
                 <TaskNotFound>
                   <Loader />
                 </TaskNotFound>
-              ) : tasks?.length < 1 && status !== 'loading' ? (
+              </MainTaskArea>
+            ) : tasks?.length < 1 && status !== 'loading' ? (
+              <MainTaskArea>
                 <TaskNotFound>{status}</TaskNotFound>
-              ) : (
-                tasks?.map((task, index) => {
-                  return (
-                    <div key={index}>
-                      <Task
-                        onClick={() => {
-                          setCurrentTask(task);
-                          if (sideBarPage !== 'update')
-                            setSideBarPage('update');
-                        }}
-                      >
-                        <b>
-                          {index + 1}
-                          {'.  '}
-                        </b>
-                        <span>{task.title}</span>{' '}
-                        <span>
-                          {task.startTime} - {task.endTime}
-                        </span>
-                        {' | '}
-                        <span>{task.duration}</span>
-                      </Task>
-                      <hr />
-                    </div>
-                  );
-                })
-              )}
-            </MainTaskArea>
-
+              </MainTaskArea>
+            ) : (
+              <MainTaskArea style={{ paddingTop: 0 }}>
+                <ViewTasks
+                  tasks={tasks}
+                  setCurrentTask={getCurrentTask}
+                  setSideBarPage={getSideBar}
+                />
+              </MainTaskArea>
+            )}
             <TaskSideBar>
               {sideBarPage === 'add' ? (
                 <AddTask />

@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../../app/hooks';
 import { updateTask } from '../taskSlice';
 import { AddTaskContainer, Input, Label, LabelText } from './sidebarStyles';
 import { getDuration } from '../../../helpers/getDuration';
+import moment from 'moment';
 
 interface task {
   _id: string;
@@ -11,6 +12,7 @@ interface task {
   endTime: string;
   duration: string;
   createdDate: Date;
+  week: number;
 }
 
 const UpdateTask: FC<{ task: task }> = ({ task }) => {
@@ -21,9 +23,9 @@ const UpdateTask: FC<{ task: task }> = ({ task }) => {
     endTime: '00:00',
     duration: '00:00',
     createdDate: new Date(),
+    week: 0,
   });
   const dispatch = useAppDispatch();
-
   const handleFormChange = (Label: string, value: string) => {
     setFormValues((prev) => {
       return { ...prev, [Label]: value };
@@ -96,9 +98,22 @@ const UpdateTask: FC<{ task: task }> = ({ task }) => {
       <div>
         <button onClick={handleUpdate}>Update</button>
       </div>
-      <div style={{ fontSize: 12, marginTop: '5px' }}>
-        <span>created date: </span>
-        {formValues.createdDate?.toString().split('T')[0]}
+      <div
+        style={{
+          fontSize: 12,
+          marginTop: '5px',
+          width: '80%',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
+        <span>
+          <b>Created Date:</b>{' '}
+          {moment(formValues.createdDate).format('ddd MMM DD YYYY')}
+        </span>
+        <span>
+          <b>Week:</b> {formValues.week}
+        </span>
       </div>
     </AddTaskContainer>
   );
