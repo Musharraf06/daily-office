@@ -50,8 +50,3 @@ export const DateCloseIcon = styled.span`
   margin: 3px;
 `;
 
-export const FilterInput = styled.input`
-  outline: none;
-  border: none;
-  padding: 6px;
-`;

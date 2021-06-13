@@ -37,8 +37,23 @@ export const Button = styled.button<{ fieldValue: any }>`
 
 export const Label = styled.label`
   display: grid;
-  grid-template-columns: 5.4rem 8rem;
+  grid-template-columns: 6.4rem 12rem;
   margin: 0.4rem;
+`;
+
+export const RadioContainer = styled.div`
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 0.5;
+  color: #212529;
+  background-color: #fff;
+  outline: none;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  display: grid;
+  grid-template-columns: auto auto;
+  place-items: center;
 `;
 
 export const LabelText = styled.span`

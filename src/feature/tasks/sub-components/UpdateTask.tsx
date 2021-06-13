@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useAppDispatch } from '../../../app/hooks';
 import { updateTask } from '../taskSlice';
-import { AddTaskContainer, Input, Label, LabelText } from './sidebarStyles';
+import { AddTaskContainer, Input, Label, LabelText, RadioContainer } from './sidebarStyles';
 import { getDuration } from '../../../helpers/getDuration';
 import moment from 'moment';
 
@@ -13,6 +13,10 @@ interface task {
   duration: string;
   createdDate: Date;
   week: number;
+  category?: string;
+  project?: string;
+  clientName?: string;
+  billable?: string;
 }
 
 const UpdateTask: FC<{ task: task }> = ({ task }) => {
@@ -95,7 +99,66 @@ const UpdateTask: FC<{ task: task }> = ({ task }) => {
           placeholder='eg: hh:mm (24hr)'
         />
       </Label>
-      <div>
+      <Label>
+        <LabelText>Category</LabelText>
+        <Input
+          type='text'
+          value={formValues.category}
+          onChange={(e) => {
+            handleFormChange('category', e.target.value);
+          }}
+          placeholder='GBU project, Internal meeting, etc'
+        />
+      </Label>
+      <Label>
+        <LabelText>Project</LabelText>
+        <Input
+          type='text'
+          value={formValues.project}
+          onChange={(e) => {
+            handleFormChange('project', e.target.value);
+          }}
+          placeholder='MySinergy, flashcard, etc'
+        />
+      </Label>
+      <Label>
+        <LabelText>Client Name</LabelText>
+        <Input
+          type='text'
+          value={formValues.clientName}
+          onChange={(e) => {
+            handleFormChange('clientName', e.target.value);
+          }}
+          placeholder='Internal, Sanofi, etc'
+        />
+      </Label>
+      <div style={{ display: 'grid', gridTemplateColumns: '6.4rem 12rem' }}>
+        <LabelText>Billable</LabelText>
+        <RadioContainer>
+          {' '}
+          <label>Yes
+            <input
+              name='billable'
+              type='radio'
+              value='Billable'
+              onChange={(e) => {
+                handleFormChange('billable', e.target.value);
+              }}
+            />
+          </label>
+          <label>No
+            <input
+              name='billable'
+              type='radio'
+              value='Non-Billable'
+              onChange={(e) => {
+                handleFormChange('billable', e.target.value);
+              }}
+            />
+          </label>
+        </RadioContainer>
+      </div>
+      <div style={{ margin: '0.8rem' }}>
         <button onClick={handleUpdate}>Update</button>
       </div>
       <div

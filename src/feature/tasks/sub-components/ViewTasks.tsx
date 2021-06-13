@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
-import { Task, DateCloseIcon, FilterInput } from '../taskStyles';
+import { Task, DateCloseIcon } from '../taskStyles';
+import { FilterInput } from '../../../styles';
 import moment from 'moment';
 
 interface task {
@@ -10,6 +11,10 @@ interface task {
   duration: string;
   createdDate: Date;
   week: number;
+  category?: string;
+  project?: string;
+  clientName?: string;
+  billable?: string;
 }
 
 type viewTaskProps = {

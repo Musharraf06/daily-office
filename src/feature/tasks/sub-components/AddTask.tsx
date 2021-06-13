@@ -7,6 +7,7 @@ import {
   Button,
   Label,
   LabelText,
+  RadioContainer
 } from './sidebarStyles';
 import { getDuration } from '../../../helpers/getDuration';
 import moment from 'moment';
@@ -79,7 +80,63 @@ const AddTask: FC = () => {
           placeholder='eg: hh:mm (24hr)'
         />
       </Label>
-      <div>
+      <Label>
+        <LabelText>Category</LabelText>
+        <Input
+          type='text'
+          onChange={(e) => {
+            handleFormChange('category', e.target.value);
+          }}
+          placeholder='GBU project, Internal meeting, etc'
+        />
+      </Label>
+      <Label>
+        <LabelText>Project</LabelText>
+        <Input
+          type='text'
+          onChange={(e) => {
+            handleFormChange('project', e.target.value);
+          }}
+          placeholder='MySinergy, flashcard, etc'
+        />
+      </Label>
+      <Label>
+        <LabelText>Client Name</LabelText>
+        <Input
+          type='text'
+          onChange={(e) => {
+            handleFormChange('clientName', e.target.value);
+          }}
+          placeholder='Internal, Sanofi, etc'
+        />
+      </Label>
+      <div style={{ display: 'grid', gridTemplateColumns: '6.4rem 12rem' }}>
+        <LabelText>Billable</LabelText>
+        <RadioContainer>
+          {' '}
+          <label>Yes
+            <input
+              name='billable'
+              type='radio'
+              value='Billable'
+              onChange={(e) => {
+                handleFormChange('billable', e.target.value);
+              }}
+            />
+          </label>
+          <label>No
+            <input
+              name='billable'
+              type='radio'
+              value='Non-Billable'
+              onChange={(e) => {
+                handleFormChange('billable', e.target.value);
+              }}
+            />
+          </label>
+        </RadioContainer>
+      </div>
+      <div style={{ margin: '0.6rem' }}>
         <Button onClick={handleTaskAdd} fieldValue={formValues}>
           Add
         </Button>

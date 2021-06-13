@@ -10,7 +10,7 @@ export const HeaderContainer = styled.div`
 }
 `;
 
-export const NavLink = styled.a<{ activePage: boolean }>`
+export const NavLink = styled.a<{ activePage?: boolean }>`
   margin: 0 0.7rem;
   padding: 2px 20px;
   font-size: 19px;
